@@ -4,53 +4,69 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+import org.springframework.hateoas.RepresentationModel;
 
 @Entity
-public class Reservation {
+public class Reservation extends RepresentationModel<Reservation> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long reservationId;
+	@ManyToOne
 	private User user;
-	private ReservationDetails details;
-	
-	public Reservation() {};
-	
-	public Reservation(Long id, User user, ReservationDetails details) {
+	private String date;
+	private String time;
+	private Integer maxGuests;
+
+	public Reservation() {
+	}
+
+	public Reservation(Long id, User user) {
 		super();
-		this.id = id;
+		this.reservationId = id;
 		this.user = user;
-		this.details = details;
 	}
 
 	public Long getId() {
-		return id;
+		return reservationId;
 	}
-
 
 	public void setId(Long id) {
-		this.id = id;
+		this.reservationId = id;
 	}
-
 
 	public User getUser() {
 		return user;
 	}
 
-
 	public void setUser(User user) {
 		this.user = user;
 	}
 
-
-	public ReservationDetails getDetails() {
-		return details;
+	public String getDate() {
+		return date;
 	}
 
-
-	public void setDetails(ReservationDetails details) {
-		this.details = details;
+	public void setDate(String date) {
+		this.date = date;
 	}
-	
-	
+
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+
+	public Integer getMaxGuests() {
+		return maxGuests;
+	}
+
+	public void setMaxGuests(Integer maxGuests) {
+		this.maxGuests = maxGuests;
+	}
+
 }

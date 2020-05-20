@@ -1,18 +1,26 @@
 package com.esu.reservation.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import org.springframework.hateoas.RepresentationModel;
 
 @Entity
-public class ReservationDetails {
+public class AvailableTimes extends RepresentationModel<AvailableTimes>{
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String date;
 	private String time;
 	private Integer maxGuests;
+	private Boolean available;
 	
-	public ReservationDetails() {}
+	public AvailableTimes() {}
 	
-	public ReservationDetails(Long id, String date, String time, Integer maxGuests) {
+	public AvailableTimes(Long id, String date, String time, Integer maxGuests) {
 		super();
 		this.id = id;
 		this.date = date;
@@ -44,5 +52,14 @@ public class ReservationDetails {
 		this.maxGuests = maxGuests;
 	}
 
+	public Boolean getAvailable() {
+		return available;
+	}
+
+	public void setAvailable(Boolean available) {
+		this.available = available;
+	}
+
+	
 
 }

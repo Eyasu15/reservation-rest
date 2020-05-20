@@ -1,9 +1,12 @@
 package com.esu.reservation.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class User {
@@ -13,6 +16,8 @@ public class User {
 	private String name;
 	private String email;
 	private String phone;
+	@OneToMany(mappedBy = "user")
+	private List<Reservation> reservation;
 	
 	public User() {}
 	
@@ -48,6 +53,15 @@ public class User {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+
+	public List<Reservation> getReservation() {
+		return reservation;
+	}
+
+	public void setReservation(List<Reservation> reservation) {
+		this.reservation = reservation;
+	}
+	
 	
 	
 }
