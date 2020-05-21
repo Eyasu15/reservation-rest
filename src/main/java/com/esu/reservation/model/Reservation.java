@@ -1,8 +1,6 @@
 package com.esu.reservation.model;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
@@ -12,7 +10,6 @@ import org.springframework.hateoas.RepresentationModel;
 public class Reservation extends RepresentationModel<Reservation> {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long reservationId;
 	@ManyToOne
 	private User user;
@@ -24,7 +21,6 @@ public class Reservation extends RepresentationModel<Reservation> {
 	}
 
 	public Reservation(Long id, User user) {
-		super();
 		this.reservationId = id;
 		this.user = user;
 	}

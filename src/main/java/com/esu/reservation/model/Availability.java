@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import org.springframework.hateoas.RepresentationModel;
 
 @Entity
-public class AvailableTimes extends RepresentationModel<AvailableTimes>{
+public class Availability extends RepresentationModel<Availability>{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,9 +18,9 @@ public class AvailableTimes extends RepresentationModel<AvailableTimes>{
 	private Integer maxGuests;
 	private Boolean available;
 	
-	public AvailableTimes() {}
+	public Availability() {}
 	
-	public AvailableTimes(Long id, String date, String time, Integer maxGuests) {
+	public Availability(Long id, String date, String time, Integer maxGuests) {
 		super();
 		this.id = id;
 		this.date = date;

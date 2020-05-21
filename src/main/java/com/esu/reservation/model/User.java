@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class User {
 	@Id
@@ -17,12 +19,12 @@ public class User {
 	private String email;
 	private String phone;
 	@OneToMany(mappedBy = "user")
+	@JsonIgnore
 	private List<Reservation> reservation;
 	
 	public User() {}
 	
 	public User(String id, String name, String email, String phone) {
-		super();
 		this.id = id;
 		this.name = name;
 		this.email = email;
