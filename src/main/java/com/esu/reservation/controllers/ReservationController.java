@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.esu.reservation.exceptions.MissingApiIdException;
+import com.esu.reservation.exceptions.MissingRequestParamException;
 import com.esu.reservation.model.Availability;
 import com.esu.reservation.model.Reservation;
 import com.esu.reservation.repository.AvailabilityRepository;
@@ -36,37 +36,36 @@ public class ReservationController {
 	
 	@Autowired
 	private AvailabilityRepository availabilityRepo;
+	
 
-	//get user reservation by api-id
 	@GetMapping("")
-	public CollectionModel<Reservation> showAllReservations(@RequestParam String userId) {
+	public CollectionModel<Reservation> showAllReservations (@RequestParam String user_key){
+	
 		
-		if(userId.isEmpty() || !userRepo.findById(userId).isPresent())
-			throw new MissingApiIdException("Api-id Not Found");
+		if(user_key==null || !userRepo.findById(user_key).isPresent())
+			throw new MissingRequestParamException("User_id Not Present");
 		
-		List<Reservation> reservations = repository.findByUserId(userId);
-		
+		List<Reservation> reservations = repository.findByUserId(user_key);
+
 		for(Reservation reservation: reservations) {
 			Link selfLink = linkTo(methodOn(this.getClass())
 								.cancelReservation(reservation.getId()))
 								.withRel("cancel");
 			reservation.add(selfLink);
 		}
-		
-		Link link = linkTo(this.getClass()).withSelfRel();
-		
+				
 		CollectionModel<Reservation> model = CollectionModel.of(reservations);
-		model.add(link);
 		
 		return model;
 	}
 	
-	//get one reservation 
 	@GetMapping("/{id}")
-	public EntityModel<Reservation> showOneReservation(@PathVariable Long id ,@RequestParam String userId) {
+	public EntityModel<Reservation> showOneReservation(@PathVariable Long id ,@RequestParam String user_key) {
 		Reservation reservation = repository.findById(id).get();
 		
-		Link link = linkTo(methodOn(this.getClass()).showAllReservations(userId)).withRel("all-reservations");
+		Link link = linkTo(methodOn(this.getClass())
+					.showAllReservations(user_key))
+					.withRel("all-reservations");
 		
 		EntityModel<Reservation> model = EntityModel.of(reservation);
 		model.add(link);
@@ -74,7 +73,6 @@ public class ReservationController {
 		return model;
 	}
 	
-	//cancel a reservation
 	@GetMapping("/cancel/{id}")
 	public ResponseEntity<Object> cancelReservation(@PathVariable Long id) {
 		repository.deleteById(id);

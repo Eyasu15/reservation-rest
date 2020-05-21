@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12"></div>
+			     <div class="col-md-12 ">
+	                <div th:object="${user}">
+	                	<h2>Generated User Key</h2>
+	                	&nbsp;
+						<p th:text="'Your Use key for '+*{name}+' is:'"></p>	                	
+	              		&nbsp;
+	              		<p th:text="*{id}"></p>	                	
+	              		&nbsp;
+	              		<p>You can start using this key to reserve or cancel a reservation. Simply pass your key in the URL when making a web request. Here's an example:
+	              		&nbsp;
+	              		<p>To view Availability</p>
+	              		<p>http://localhost:8080/my-restaurant/availability?<strong>user_key=40288088723863ed0</strong></p>  
+	              		&nbsp;
+	              		<p>To view Your Reservations</p>
+	              		<p>http://localhost:8080/my-restaurant/reservation?<strong>user_key=40288088723863ed0</strong></p>  
+	              		&nbsp;
+	              		<p th:text="'Account Email: '+*{email}"></p>
+	              		<p th:text="'Account Id: '+*{id}"></p>
+	                </div> 
+				</div>
+			</div>
+		</div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12"></div>
+			     <div class="col-md-12 text-center">
+			        <form class="text-center border border-light p-5" action="#" th:action="@{/my-restaurant/users/save}" th:object="${user}" method="post">			            			              
+		                <h2>Register Below to get an Api-id</h2>
+						<div class="row d-flex justify-content-center">
+							<table>
+								<tr>
+									<td><label>Name</label></td>
+									<td><input type="text" th:field="*{name}" required="true"/></td>
+									<td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Email Error</td>
+								</tr>
+								<tr>
+									<td><label>Email</label></td>
+									<td><input type="email" th:field="*{email}" required="true"/></td>
+									<td th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</td>
+								</tr>
+								<tr>
+									<td><label>Phone</label></td>
+									<td><input type="number" th:field="*{phone}" required="true"/></td>
+									<td th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">Email Error</td>
+								</tr>
+							</table>
+						</div>
+		                <div>
+		                    <button class="btn btn-info btn-block my-4" type="submit">Submit</button>
+		                </div>	             
+			        </form>
+				</div>
+			</div>
+		</div>
+</body>
+</html>

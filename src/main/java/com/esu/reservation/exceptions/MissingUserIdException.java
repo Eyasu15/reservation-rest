@@ -1,13 +1,13 @@
 package com.esu.reservation.exceptions;
 
-public class MissingApiIdException extends RuntimeException {
+public class MissingUserIdException extends RuntimeException {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public MissingApiIdException(String message) {
+	public MissingUserIdException(String message) {
         super(message);
     }
 	
